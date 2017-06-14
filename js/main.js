@@ -10,8 +10,17 @@ for(var product in productsList){
 }
 
 $('.newproduct').click(function () {
-    
+    var currentId = $(this).attr('data-id');
     var id = 'id' + sessionStorage.length + 1;
+    
+    console.log(currentId, typeof currentId);
+    if(currentId !== undefined){
+        sessionStorage.removeItem(currentId);
+        $('div[data-id='+ currentId +']').remove();
+        id = currentId;
+        
+    }
+    
     var product = {
         id: id,
         title: $('#title').val(),
@@ -30,6 +39,14 @@ $('.newproduct').click(function () {
     $('#myModal').modal('hide');
 });
 
+$('.addProduct').click(function () {
+    $('#title').val('');
+    $('#price').val('');
+    $('#description').val('');
+    
+    $('.newproduct').removeAttr('data-id');
+});
+
 
 $(document).on('click', '.removeProduct' ,function () {
     var itemId = $(this).parent().attr('data-id');
@@ -46,4 +63,6 @@ $(document).on('click', '.editProduct' ,function () {
     $('#title').val(item.title);
     $('#price').val(item.price);
     $('#description').val(item.description);
+    
+    $('.newproduct').attr('data-id', itemId);
 });
