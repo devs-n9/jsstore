@@ -10,27 +10,20 @@ for(var product in productsList){
 }
 
 $('.newproduct').click(function () {
-    var currentId = $(this).attr('data-id');
-    var id = 'id' + sessionStorage.length + 1;
-    
-    console.log(currentId, typeof currentId);
-    if(currentId !== undefined){
-        sessionStorage.removeItem(currentId);
-        $('div[data-id='+ currentId +']').remove();
-        id = currentId;
-        
-    }
     
     var product = {
-        id: id,
         title: $('#title').val(),
         price: $('#price').val(),
         description: $('#description').val()
     };
     
-    appendProduct(product);
-    
-    sessionStorage.setItem(id, JSON.stringify(product));
+    $.post('/addnewproduct.php', product, function (res) {
+        console.log(res);
+        if(res.status == "ok"){
+            appendProduct(product);
+        }
+        
+    });
     
     $('#title').val('');
     $('#price').val('');
