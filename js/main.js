@@ -2,7 +2,6 @@ function appendProduct (obj) {
     $('.product-list > .row').append("<div class='col-md-4' data-id='" + obj.id + "'><h2>" + obj.title + "</h2><p>" + obj.price + "</p><p>" + obj.description + "</p><button class='btn btn-success editProduct' data-toggle='modal' data-target='#myModal'>Edit</button>&nbsp; &nbsp;<button class='btn btn-danger removeProduct'>Delete</button></div></div>" );
 }
 
-var productsList = sessionStorage;
 
 for(var product in productsList){
     var item = JSON.parse(productsList[product]);
@@ -21,8 +20,7 @@ $('.newproduct').click(function () {
         console.log(res);
         if(res.status == "ok"){
             appendProduct(product);
-        }
-        
+        }   
     });
     
     $('#title').val('');
