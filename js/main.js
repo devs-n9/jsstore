@@ -55,5 +55,7 @@ $(document).on('click', '.editProduct' ,function () {
     $('#price').val(item.price);
     $('#description').val(item.description);
     
+    //test
+
     $('.newproduct').attr('data-id', itemId);
 });
